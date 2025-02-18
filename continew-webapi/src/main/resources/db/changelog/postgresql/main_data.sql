@@ -182,7 +182,15 @@ VALUES
 (19, 'MAIL', '密码', 'MAIL_PASSWORD', NULL, NULL, NULL),
 (20, 'MAIL', '是否启用SSL', 'MAIL_SSL_ENABLED', NULL, '1', NULL),
 (21, 'MAIL', 'SSL端口', 'MAIL_SSL_PORT', NULL, '465', NULL),
-(22, 'LOGIN', '是否启用验证码', 'LOGIN_CAPTCHA_ENABLED', NULL, '1', '是否启用验证码（1：是；0：否）');
+(22, 'LOGIN', '是否启用验证码', 'LOGIN_CAPTCHA_ENABLED', NULL, '1', '是否启用验证码（1：是；0：否）'),
+(23, 'STORAGE', '默认存储', 'STORAGE_DEFAULT', 'S3', 'LOCAL', '默认存储'),
+(24, 'STORAGE', '本地存储桶', 'STORAGE_LOCAL_BUCKET', 'F:\\file', '/Users/echo/Downloads/bdca/2024', '本地储桶-绝对路径'),
+(25, 'STORAGE', '本地终端节点', 'STORAGE_LOCAL_ENDPOINT', 'localhost:8000/file', 'localhost:8000', '本地后端映射地址'),
+(26, 'STORAGE', 'S3访问密钥', 'STORAGE_S3_ACCESS_KEY', 'xxxx', 'xxxx', 'S3存储服务的访问密钥'),
+(27, 'STORAGE', 'S3私有密钥', 'STORAGE_S3_SECRET_KEY', 'xxxx', 'xxxx', 'S3存储服务的私有密钥'),
+(28, 'STORAGE', 'S3存储桶', 'STORAGE_S3_BUCKET', 'continew', 'continew', 'S3存储服务的存储桶名称'),
+(29, 'STORAGE', 'S3终端节点', 'STORAGE_S3_ENDPOINT', '192.168.20.222:50000', '192.168.20.222:50000', 'S3存储服务的终端节点'),
+(30, 'STORAGE', 'S3作用域', 'STORAGE_S3_REGION', 'cn-hangzhou', 'cn-hangzhou', 'S3存储服务的作用域/区域');
 
 -- 初始化默认字典
 INSERT INTO "sys_dict"
@@ -239,13 +247,6 @@ VALUES
 
 -- 初始化默认角色和部门关联数据
 INSERT INTO "sys_role_dept" ("role_id", "dept_id") VALUES (547888897925840927, 547887852587843593);
-
--- 初始化默认存储
-INSERT INTO "sys_storage"
-("id", "name", "code", "type", "access_key", "secret_key", "endpoint", "bucket_name", "domain", "description", "is_default", "sort", "status", "create_user", "create_time")
-VALUES
-(1, '开发环境', 'local_dev', 2, NULL, NULL, NULL, 'C:/continew-admin/data/file/', 'http://localhost:8000/file', '本地存储', true, 1, 1, 1, NOW()),
-(2, '生产环境', 'local_prod', 2, NULL, NULL, NULL, '../data/file/', 'http://api.continew.top/file', '本地存储', false, 2, 2, 1, NOW());
 
 -- 初始化客户端数据
 INSERT INTO "sys_client"
