@@ -16,8 +16,6 @@
 
 package top.continew.admin.common.config.exception;
 
-import cn.hutool.core.text.CharSequenceUtil;
-import cn.hutool.core.util.NumberUtil;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
@@ -27,7 +25,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
-import org.springframework.web.multipart.MultipartException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import top.continew.starter.core.exception.BadRequestException;
 import top.continew.starter.core.exception.BusinessException;
@@ -37,6 +34,7 @@ import top.continew.starter.web.model.R;
  * 全局异常处理器
  *
  * @author Charles7c
+ * @author echo
  * @since 2024/8/7 20:21
  */
 @Slf4j
@@ -51,6 +49,26 @@ public class GlobalExceptionHandler {
     public R handleBusinessException(BusinessException e, HttpServletRequest request) {
         log.error("[{}] {}", request.getMethod(), request.getRequestURI(), e);
         return R.fail(String.valueOf(HttpStatus.INTERNAL_SERVER_ERROR.value()), e.getMessage());
+    }
+
+    /**
+     * 拦截请求 URL 不存在异常
+     */
+    @ExceptionHandler(NoHandlerFoundException.class)
+    public R handleNoHandlerFoundException(NoHandlerFoundException e, HttpServletRequest request) {
+        log.error("[{}] {}", request.getMethod(), request.getRequestURI(), e);
+        return R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请求 URL '%s' 不存在".formatted(request
+            .getRequestURI()));
+    }
+
+    /**
+     * 拦截不支持的 HTTP 请求方法异常
+     */
+    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
+    public R handleHttpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e,
+                                                          HttpServletRequest request) {
+        log.error("[{}] {}", request.getMethod(), request.getRequestURI(), e);
+        return R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请求方式 '%s' 不支持".formatted(e.getMethod()));
     }
 
     /**
@@ -73,62 +91,12 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 拦截请求路径不存在异常
-     */
-    @ExceptionHandler(NoHandlerFoundException.class)
-    public R noHandlerFoundException(NoHandlerFoundException e, HttpServletRequest request) {
-        log.error("[{}] {}", request.getMethod(), request.getRequestURI(), e);
-        String errorMessage = String.format("请求路径不存在,请检查URL是否正确: [%s]", request.getRequestURI());
-        return R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), errorMessage);
-    }
-
-    /**
-     * 拦截不支持的http请求方法异常
-     */
-    @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public R httpRequestMethodNotSupportedException(HttpRequestMethodNotSupportedException e, HttpServletRequest request) {
-        // 获取请求的 HTTP 方法和 URI
-        String requestMethod = request.getMethod();
-        String requestURI = request.getRequestURI();
-        log.error("[{}] {}", requestMethod, requestURI, e);
-        String errorMessage = String.format("不支持的请求方式: [%s] ,请检查请求方式是否正确,请求路径: [%s]", requestMethod, requestURI);
-        return R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), errorMessage);
-    }
-
-    /**
      * 拦截文件上传大小超过限制异常
      */
     @ExceptionHandler(MaxUploadSizeExceededException.class)
-    public R handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e,
-                                                  HttpServletRequest request) {
+    public R handleMaxUploadSizeExceededException(MaxUploadSizeExceededException e, HttpServletRequest request) {
         log.error("[{}] {}", request.getMethod(), request.getRequestURI(), e);
-        return R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "上传文件大小超过限制");
-    }
-
-    /**
-     * 拦截文件上传异常-超过上传大小限制
-     */
-    @ExceptionHandler(MultipartException.class)
-    public R handleRequestTooBigException(MultipartException e, HttpServletRequest request) {
-        log.error("[{}] {}", request.getMethod(), request.getRequestURI(), e);
-        String msg = e.getMessage();
-        R defaultFail = R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), msg);
-        if (CharSequenceUtil.isBlank(msg)) {
-            return defaultFail;
-        }
-        String sizeLimit;
-        Throwable cause = e.getCause();
-        if (null != cause) {
-            msg = msg.concat(cause.getMessage().toLowerCase());
-        }
-        if (msg.contains("size") && msg.contains("exceed")) {
-            sizeLimit = CharSequenceUtil.subBetween(msg, "the maximum size ", " for");
-        } else if (msg.contains("larger than")) {
-            sizeLimit = CharSequenceUtil.subAfter(msg, "larger than ", true);
-        } else {
-            return defaultFail;
-        }
-        String errorMsg = "请上传小于 %sKB 的文件".formatted(NumberUtil.parseLong(sizeLimit) / 1024);
-        return R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), errorMsg);
+        return R.fail(String.valueOf(HttpStatus.BAD_REQUEST.value()), "请上传小于 %s bytes 的文件".formatted(e
+            .getMaxUploadSize()));
     }
 }

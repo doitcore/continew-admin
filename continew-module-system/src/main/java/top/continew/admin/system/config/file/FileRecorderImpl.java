@@ -16,7 +16,6 @@
 
 package top.continew.admin.system.config.file;
 
-
 import cn.hutool.core.util.EscapeUtil;
 import cn.hutool.core.util.StrUtil;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,6 @@ import top.continew.admin.system.model.entity.FileDO;
 import top.continew.starter.core.constant.StringConstants;
 import top.continew.starter.storage.dao.StorageDao;
 import top.continew.starter.storage.model.resp.UploadResp;
-
 
 /**
  * 文件记录实现类
@@ -47,8 +45,8 @@ public class FileRecorderImpl implements StorageDao {
         file.setStorageCode(uploadResp.getCode());
         String originalFilename = EscapeUtil.unescape(uploadResp.getOriginalFilename());
         file.setName(StrUtil.contains(originalFilename, StringConstants.DOT)
-                ? StrUtil.subBefore(originalFilename, StringConstants.DOT, true)
-                : originalFilename);
+            ? StrUtil.subBefore(originalFilename, StringConstants.DOT, true)
+            : originalFilename);
         file.setUrl(uploadResp.getUrl());
         file.setPath(uploadResp.getBasePath());
         file.setSize(uploadResp.getSize());

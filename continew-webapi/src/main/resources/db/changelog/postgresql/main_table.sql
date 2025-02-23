@@ -312,7 +312,7 @@ CREATE TABLE IF NOT EXISTS "sys_log" (
     "id"               int8         NOT NULL,
     "trace_id"         varchar(255) DEFAULT NULL,
     "description"      varchar(255) NOT NULL,
-    "module"           varchar(50)  NOT NULL,
+    "module"           varchar(100) NOT NULL,
     "request_url"      varchar(512) NOT NULL,
     "request_method"   varchar(10)  NOT NULL,
     "request_headers"  text         DEFAULT NULL,
@@ -442,6 +442,7 @@ CREATE TABLE IF NOT EXISTS "sys_file" (
 );
 CREATE INDEX "idx_file_url"  ON "sys_file" ("url");
 CREATE INDEX "idx_file_type" ON "sys_file" ("type");
+CREATE INDEX "idx_file_storage_code" ON "sys_file" ("storage_code");
 CREATE INDEX "idx_file_create_user" ON "sys_file" ("create_user");
 CREATE INDEX "idx_file_update_user" ON "sys_file" ("update_user");
 COMMENT ON COLUMN "sys_file"."id"             IS 'ID';

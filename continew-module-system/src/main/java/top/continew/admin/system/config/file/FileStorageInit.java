@@ -53,35 +53,22 @@ public class FileStorageInit {
         String localBucket = map.get("STORAGE_LOCAL_BUCKET");
 
         // 构建并加载本地存储配置
-        StorageProperties localProperties = buildStorageProperties(
-                StorageTypeEnum.LOCAL.name(),
-                localBucket,
-                storageDefault,
-                localEndpoint);
+        StorageProperties localProperties = buildStorageProperties(StorageTypeEnum.LOCAL
+            .name(), localBucket, storageDefault, localEndpoint);
         // 本地静态资源映射
-        SpringWebUtils.registerResourceHandler(MapUtil.of(StorageUtils.createUriWithProtocol(localEndpoint).getPath(), localBucket));
-        StorageManager.load(
-                localProperties.getCode(),
-                new LocalStorageStrategy(
-                        new LocalClient(localProperties), SpringUtil.getBean(StorageDao.class)
-                )
-        );
+        SpringWebUtils.registerResourceHandler(MapUtil.of(StorageUtils.createUriWithProtocol(localEndpoint)
+            .getPath(), localBucket));
+        StorageManager.load(localProperties
+            .getCode(), new LocalStorageStrategy(new LocalClient(localProperties), SpringUtil
+                .getBean(StorageDao.class)));
 
         // 构建并加载 S3 存储配置
-        StorageProperties ossProperties = buildStorageProperties(
-                StorageTypeEnum.S3.name(),
-                map.get("STORAGE_S3_BUCKET"),
-                storageDefault,
-                map.get("STORAGE_S3_ACCESS_KEY"),
-                map.get("STORAGE_S3_SECRET_KEY"),
-                map.get("STORAGE_S3_ENDPOINT"),
-                map.get("STORAGE_S3_REGION"));
+        StorageProperties ossProperties = buildStorageProperties(StorageTypeEnum.S3.name(), map
+            .get("STORAGE_S3_BUCKET"), storageDefault, map.get("STORAGE_S3_ACCESS_KEY"), map
+                .get("STORAGE_S3_SECRET_KEY"), map.get("STORAGE_S3_ENDPOINT"), map.get("STORAGE_S3_REGION"));
 
-        StorageManager.load(
-                ossProperties.getCode(), new OssStorageStrategy(
-                        new OssClient(ossProperties), SpringUtil.getBean(StorageDao.class)
-                )
-        );
+        StorageManager.load(ossProperties.getCode(), new OssStorageStrategy(new OssClient(ossProperties), SpringUtil
+            .getBean(StorageDao.class)));
     }
 
     public void unLoad(String code) {

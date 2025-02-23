@@ -18,24 +18,19 @@ package top.continew.admin.system.service.impl;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.core.util.URLUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import top.continew.admin.system.mapper.FileMapper;
 import top.continew.admin.system.model.entity.FileDO;
-import top.continew.admin.system.model.entity.StorageDO;
 import top.continew.admin.system.model.query.FileQuery;
 import top.continew.admin.system.model.req.FileReq;
 import top.continew.admin.system.model.resp.FileResp;
 import top.continew.admin.system.model.resp.FileStatisticsResp;
 import top.continew.admin.system.model.resp.FileUploadResp;
 import top.continew.admin.system.service.FileService;
-import top.continew.starter.core.constant.StringConstants;
 import top.continew.starter.core.exception.BusinessException;
-import top.continew.starter.core.util.StrUtils;
-import top.continew.starter.core.util.URLUtils;
 import top.continew.starter.extension.crud.service.BaseServiceImpl;
 import top.continew.starter.storage.manger.StorageManager;
 import top.continew.starter.storage.model.resp.UploadResp;
@@ -43,7 +38,6 @@ import top.continew.starter.storage.strategy.StorageStrategy;
 
 import java.io.IOException;
 import java.util.List;
-
 
 /**
  * 文件业务实现
@@ -55,7 +49,6 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class FileServiceImpl extends BaseServiceImpl<FileMapper, FileDO, FileResp, FileResp, FileQuery, FileReq> implements FileService {
-
 
     @Override
     protected void beforeDelete(List<Long> ids) {
@@ -76,7 +69,8 @@ public class FileServiceImpl extends BaseServiceImpl<FileMapper, FileDO, FileRes
         }
         UploadResp uploadResp;
         try {
-            uploadResp = instance.upload(file.getOriginalFilename(), null, file.getInputStream(), file.getContentType(), true);
+            uploadResp = instance.upload(file.getOriginalFilename(), null, file.getInputStream(), file
+                .getContentType(), true);
         } catch (IOException e) {
             throw new BusinessException("文件上传失败", e);
         }

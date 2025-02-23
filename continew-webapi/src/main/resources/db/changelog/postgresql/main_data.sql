@@ -71,13 +71,6 @@ VALUES
 (1105, '删除', 1100, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:file:delete', 5, 1, 1, NOW()),
 (1106, '下载', 1100, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:file:download', 6, 1, 1, NOW()),
 
-(1110, '存储管理', 1000, 2, '/system/storage', 'SystemStorage', 'system/storage/index', NULL, 'storage', false, false, false, NULL, 8, 1, 1, NOW()),
-(1111, '列表', 1110, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:storage:list', 1, 1, 1, NOW()),
-(1112, '详情', 1110, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:storage:detail', 2, 1, 1, NOW()),
-(1113, '新增', 1110, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:storage:add', 3, 1, 1, NOW()),
-(1114, '修改', 1110, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:storage:update', 4, 1, 1, NOW()),
-(1115, '删除', 1110, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:storage:delete', 5, 1, 1, NOW()),
-
 ( 1180, '客户端管理', 1000, 2, '/system/client', 'SystemClient', 'system/client/index', NULL, 'mobile', false, false, false, NULL, 9, 1, 1, NOW()),
 (1181, '列表', 1180, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:client:list', 1, 1, 1, NOW()),
 (1182, '详情', 1180, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'system:client:detail', 2, 1, 1, NOW()),
@@ -182,15 +175,15 @@ VALUES
 (19, 'MAIL', '密码', 'MAIL_PASSWORD', NULL, NULL, NULL),
 (20, 'MAIL', '是否启用SSL', 'MAIL_SSL_ENABLED', NULL, '1', NULL),
 (21, 'MAIL', 'SSL端口', 'MAIL_SSL_PORT', NULL, '465', NULL),
-(22, 'LOGIN', '是否启用验证码', 'LOGIN_CAPTCHA_ENABLED', NULL, '1', '是否启用验证码（1：是；0：否）'),
-(23, 'STORAGE', '默认存储', 'STORAGE_DEFAULT', 'S3', 'LOCAL', '默认存储'),
-(24, 'STORAGE', '本地存储桶', 'STORAGE_LOCAL_BUCKET', 'F:\\file', '/Users/echo/Downloads/bdca/2024', '本地储桶-绝对路径'),
-(25, 'STORAGE', '本地终端节点', 'STORAGE_LOCAL_ENDPOINT', 'localhost:8000/file', 'localhost:8000', '本地后端映射地址'),
-(26, 'STORAGE', 'S3访问密钥', 'STORAGE_S3_ACCESS_KEY', 'xxxx', 'xxxx', 'S3存储服务的访问密钥'),
-(27, 'STORAGE', 'S3私有密钥', 'STORAGE_S3_SECRET_KEY', 'xxxx', 'xxxx', 'S3存储服务的私有密钥'),
-(28, 'STORAGE', 'S3存储桶', 'STORAGE_S3_BUCKET', 'continew', 'continew', 'S3存储服务的存储桶名称'),
-(29, 'STORAGE', 'S3终端节点', 'STORAGE_S3_ENDPOINT', '192.168.20.222:50000', '192.168.20.222:50000', 'S3存储服务的终端节点'),
-(30, 'STORAGE', 'S3作用域', 'STORAGE_S3_REGION', 'cn-hangzhou', 'cn-hangzhou', 'S3存储服务的作用域/区域');
+(22, 'STORAGE', '默认存储', 'STORAGE_DEFAULT', NULL, 'LOCAL', '默认存储'),
+(23, 'STORAGE', '本地存储位置', 'STORAGE_LOCAL_BUCKET', NULL, 'C:/continew-admin/data/file/', '请填写绝对路径'),
+(24, 'STORAGE', '后端映射路径', 'STORAGE_LOCAL_ENDPOINT', NULL, 'localhost:8000/file', NULL),
+(25, 'STORAGE', 'S3访问密钥', 'STORAGE_S3_ACCESS_KEY', NULL, NULL, 'S3存储服务的访问密钥'),
+(26, 'STORAGE', 'S3私有密钥', 'STORAGE_S3_SECRET_KEY', NULL, NULL, 'S3存储服务的私有密钥'),
+(27, 'STORAGE', 'S3存储桶', 'STORAGE_S3_BUCKET', NULL, 'continew', 'S3存储服务的存储桶名称'),
+(28, 'STORAGE', 'S3终端节点', 'STORAGE_S3_ENDPOINT', NULL, NULL, 'S3存储服务的终端节点'),
+(29, 'STORAGE', 'S3作用域', 'STORAGE_S3_REGION', NULL, 'cn-hangzhou', 'S3存储服务的作用域/区域'),
+(30, 'LOGIN', '是否启用验证码', 'LOGIN_CAPTCHA_ENABLED', NULL, '1', '是否启用验证码（0：否；1：是）');
 
 -- 初始化默认字典
 INSERT INTO "sys_dict"

@@ -25,10 +25,7 @@ import org.springframework.stereotype.Component;
 import top.continew.admin.system.enums.OptionCategoryEnum;
 import top.continew.admin.system.mapper.FileMapper;
 import top.continew.admin.system.service.OptionService;
-import top.continew.starter.storage.client.OssClient;
 import top.continew.starter.storage.dao.StorageDao;
-import top.continew.starter.storage.manger.StorageManager;
-import top.continew.starter.storage.strategy.StorageStrategy;
 
 import java.util.Map;
 

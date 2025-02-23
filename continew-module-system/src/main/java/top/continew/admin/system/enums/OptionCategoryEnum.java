@@ -47,6 +47,5 @@ public enum OptionCategoryEnum {
     /**
      * 存储配置
      */
-    STORAGE,
-    ;
+    STORAGE,;
 }

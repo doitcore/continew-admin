@@ -149,8 +149,8 @@ public class OptionServiceImpl implements OptionService {
      */
     private void storageReload(List<OptionReq> options) {
         Map<String, String> storage = options.stream()
-                .filter(option -> option.getCode() != null && option.getCode().startsWith("STORAGE_"))
-                .collect(Collectors.toMap(OptionReq::getCode, OptionReq::getValue));
+            .filter(option -> option.getCode() != null && option.getCode().startsWith("STORAGE_"))
+            .collect(Collectors.toMap(OptionReq::getCode, OptionReq::getValue));
         if (ObjectUtil.isNotEmpty(storage)) {
             fileStorageInit.load(storage);
         }

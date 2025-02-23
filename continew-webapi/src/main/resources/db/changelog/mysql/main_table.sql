@@ -191,7 +191,7 @@ CREATE TABLE IF NOT EXISTS `sys_log` (
     `id`               bigint(20)   NOT NULL AUTO_INCREMENT     COMMENT 'ID',
     `trace_id`         varchar(255) DEFAULT NULL                COMMENT '链路ID',
     `description`      varchar(255) NOT NULL                    COMMENT '日志描述',
-    `module`           varchar(50)  NOT NULL                    COMMENT '所属模块',
+    `module`           varchar(100) NOT NULL                    COMMENT '所属模块',
     `request_url`      varchar(512) NOT NULL                    COMMENT '请求URL',
     `request_method`   varchar(10)  NOT NULL                    COMMENT '请求方式',
     `request_headers`  text         DEFAULT NULL                COMMENT '请求头',
@@ -252,7 +252,6 @@ CREATE TABLE IF NOT EXISTS `sys_notice` (
     INDEX `idx_update_user`(`update_user`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='公告表';
 
-
 CREATE TABLE IF NOT EXISTS `sys_file` (
     `id`             bigint(20)   NOT NULL AUTO_INCREMENT     COMMENT 'ID',
     `name`           varchar(255) NOT NULL                    COMMENT '名称',
@@ -273,9 +272,10 @@ CREATE TABLE IF NOT EXISTS `sys_file` (
     PRIMARY KEY (`id`),
     INDEX `idx_url`(`url`),
     INDEX `idx_type`(`type`),
+    INDEX `idx_storage_code`(`storage_code`),
     INDEX `idx_create_user`(`create_user`),
     INDEX `idx_update_user`(`update_user`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='文件表';
 
 CREATE TABLE IF NOT EXISTS `sys_client` (
     `id`             bigint(20)   NOT NULL AUTO_INCREMENT     COMMENT 'ID',
