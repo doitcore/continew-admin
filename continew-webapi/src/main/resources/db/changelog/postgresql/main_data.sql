@@ -175,15 +175,15 @@ VALUES
 (19, 'MAIL', '密码', 'MAIL_PASSWORD', NULL, NULL, NULL),
 (20, 'MAIL', '是否启用SSL', 'MAIL_SSL_ENABLED', NULL, '1', NULL),
 (21, 'MAIL', 'SSL端口', 'MAIL_SSL_PORT', NULL, '465', NULL),
-(22, 'STORAGE', '默认存储', 'STORAGE_DEFAULT', NULL, 'LOCAL', '默认存储'),
-(23, 'STORAGE', '本地存储位置', 'STORAGE_LOCAL_BUCKET', NULL, 'C:/continew-admin/data/file/', '请填写绝对路径'),
-(24, 'STORAGE', '后端映射路径', 'STORAGE_LOCAL_ENDPOINT', NULL, 'localhost:8000/file', NULL),
+(22, 'STORAGE', '默认存储', 'STORAGE_DEFAULT', NULL, 'LOCAL', 'LOCAL：本地存储；S3：S3存储'),
+(23, 'STORAGE', '本地存储路径', 'STORAGE_LOCAL_BUCKET', NULL, 'C:/continew-admin/data/file/', '本地存储位置的绝对路径'),
+(24, 'STORAGE', '服务映射路径', 'STORAGE_LOCAL_ENDPOINT', NULL, 'localhost:8000/file', '后端服务映射路径'),
 (25, 'STORAGE', 'S3访问密钥', 'STORAGE_S3_ACCESS_KEY', NULL, NULL, 'S3存储服务的访问密钥'),
 (26, 'STORAGE', 'S3私有密钥', 'STORAGE_S3_SECRET_KEY', NULL, NULL, 'S3存储服务的私有密钥'),
 (27, 'STORAGE', 'S3存储桶', 'STORAGE_S3_BUCKET', NULL, 'continew', 'S3存储服务的存储桶名称'),
 (28, 'STORAGE', 'S3终端节点', 'STORAGE_S3_ENDPOINT', NULL, NULL, 'S3存储服务的终端节点'),
-(29, 'STORAGE', 'S3作用域', 'STORAGE_S3_REGION', NULL, 'cn-hangzhou', 'S3存储服务的作用域/区域'),
-(30, 'LOGIN', '是否启用验证码', 'LOGIN_CAPTCHA_ENABLED', NULL, '1', '是否启用验证码（0：否；1：是）');
+(29, 'STORAGE', 'S3作用域', 'STORAGE_S3_REGION', NULL, 'cn-hangzhou', 'S3存储服务的作用域/区域（例如：cn-hangzhou）'),
+(30, 'LOGIN', '是否启用验证码', 'LOGIN_CAPTCHA_ENABLED', NULL, '1', '0：否；1：是');
 
 -- 初始化默认字典
 INSERT INTO "sys_dict"
