@@ -37,6 +37,13 @@
             <artifactId>doitcore-module-system</artifactId>
         </dependency>
 
+        <!-- 客户关系管理模块（存放客户关系管理相关业务功能，例如：客户管理等） -->
+        <dependency>
+            <groupId>top.doitcore</groupId>
+            <artifactId>doitcore-module-relationship</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
         <!-- 任务调度插件（后续会改造为独立插件） -->
         <dependency>
             <groupId>top.doitcore</groupId>
