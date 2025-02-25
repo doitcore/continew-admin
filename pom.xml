@@ -16,19 +16,19 @@
         <version>2.9.0</version>
     </parent>
 
-    <groupId>top.continew</groupId>
-    <artifactId>continew-admin</artifactId>
+    <groupId>top.doitcore</groupId>
+    <artifactId>doitcore-admin</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
     <description>ContiNew Admin（Continue New Admin）持续迭代优化的前后端分离中后台管理系统框架，开箱即用，持续提供舒适的开发体验。</description>
     <url>https://github.com/continew-org/continew-admin</url>
 
     <modules>
-        <module>continew-webapi</module>
-        <module>continew-module-system</module>
-        <module>continew-plugin</module>
-        <module>continew-common</module>
-        <module>continew-extension</module>
+        <module>doitcore-webapi</module>
+        <module>doitcore-module-system</module>
+        <module>doitcore-plugin</module>
+        <module>doitcore-common</module>
+        <module>doitcore-extension</module>
     </modules>
 
     <properties>
@@ -41,43 +41,43 @@
         <dependencies>
             <!-- API 模块（存放 Controller 层代码，打包部署的模块） -->
             <dependency>
-                <groupId>top.continew</groupId>
-                <artifactId>continew-webapi</artifactId>
+                <groupId>top.doitcore</groupId>
+                <artifactId>doitcore-webapi</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- 系统管理模块（存放系统管理模块相关功能，例如：部门管理、角色管理、用户管理等） -->
             <dependency>
-                <groupId>top.continew</groupId>
-                <artifactId>continew-module-system</artifactId>
+                <groupId>top.doitcore</groupId>
+                <artifactId>doitcore-module-system</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- 公共模块（存放公共工具类，公共配置等） -->
             <dependency>
-                <groupId>top.continew</groupId>
-                <artifactId>continew-common</artifactId>
+                <groupId>top.doitcore</groupId>
+                <artifactId>doitcore-common</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- 任务调度插件（后续会改造为独立插件） -->
             <dependency>
-                <groupId>top.continew</groupId>
-                <artifactId>continew-plugin-schedule</artifactId>
+                <groupId>top.doitcore</groupId>
+                <artifactId>doitcore-plugin-schedule</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- 能力开放插件（后续会改造为独立插件） -->
             <dependency>
-                <groupId>top.continew</groupId>
-                <artifactId>continew-plugin-open</artifactId>
+                <groupId>top.doitcore</groupId>
+                <artifactId>doitcore-plugin-open</artifactId>
                 <version>${revision}</version>
             </dependency>
 
             <!-- 代码生成器插件（后续会改造为独立插件） -->
             <dependency>
-                <groupId>top.continew</groupId>
-                <artifactId>continew-plugin-generator</artifactId>
+                <groupId>top.doitcore</groupId>
+                <artifactId>doitcore-plugin-generator</artifactId>
                 <version>${revision}</version>
             </dependency>
         </dependencies>
